@@ -3,6 +3,8 @@ import { GET_EPISODES } from "@/graphql/queries"
 import { EpisodeProps } from "@/interfaces"
 import EpisodeCard from "@/components/common/EpisodeCard"
 import { useEffect, useState } from "react"
+import ErrorBoundary from "@/components/ErrorBoundary"
+import ErrorProneComponent from "@/components/ErrorProneComponent"
 
 const Home: React.FC = () => {
   const [page, setPage] = useState<number>(1)
@@ -30,6 +32,11 @@ const Home: React.FC = () => {
       </header>
 
       <main className="flex-grow p-6">
+        {/* 🔽 ErrorBoundary test block */}
+        <ErrorBoundary>
+          <ErrorProneComponent />
+        </ErrorBoundary>
+
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {results && results.map(({ id, name, air_date, episode }: EpisodeProps, key: number) => (
             <EpisodeCard
